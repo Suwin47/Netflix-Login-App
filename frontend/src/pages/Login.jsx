@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import bgImage from "../assets/bg-Img.jpg"; 
+import bgImage from "../assets/bg-img.jpg"; 
 
 function Login() {
   const [email, setEmail] = useState("");
