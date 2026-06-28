@@ -20,7 +20,7 @@ function Register() {
 
     try {
       const response = await fetch(
-        "https://netflix-login-app.onrender.com/register",
+        "https://netflix-login-app.onrender.com",
         {
           method: "POST",
           headers: {
