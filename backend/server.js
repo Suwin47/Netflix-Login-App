@@ -9,7 +9,7 @@ app.use(express.json());
 
 const USERS_FILE = "./users.json";
 
-// Get Users
+
 const getUsers = () => {
   try {
     return JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
@@ -26,12 +26,12 @@ const saveUsers = (users) => {
   );
 };
 
-// Home Route
+
 app.get("/", (req, res) => {
   res.send("Netflix Authentication API Running...");
 });
 
-// Register Route
+
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
 
@@ -66,7 +66,7 @@ app.post("/register", (req, res) => {
   });
 });
 
-// Login Route
+
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -96,14 +96,14 @@ app.post("/login", (req, res) => {
   });
 });
 
-// Dashboard Route
+
 app.get("/dashboard", (req, res) => {
   res.json({
     message: "Welcome to Dashboard",
   });
 });
 
-// Render Port Fix
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
