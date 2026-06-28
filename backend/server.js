@@ -9,7 +9,7 @@ app.use(express.json());
 
 const USERS_FILE = "./users.json";
 
-// Read users
+// Get Users
 const getUsers = () => {
   try {
     return JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
@@ -18,9 +18,12 @@ const getUsers = () => {
   }
 };
 
-// Save users
+// Save Users
 const saveUsers = (users) => {
-  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+  fs.writeFileSync(
+    USERS_FILE,
+    JSON.stringify(users, null, 2)
+  );
 };
 
 // Home Route
@@ -28,7 +31,7 @@ app.get("/", (req, res) => {
   res.send("Netflix Authentication API Running...");
 });
 
-// Register API
+// Register Route
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
 
@@ -63,9 +66,15 @@ app.post("/register", (req, res) => {
   });
 });
 
-// Login API
+// Login Route
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({
+      message: "Please fill all fields",
+    });
+  }
 
   const users = getUsers();
 
@@ -87,14 +96,15 @@ app.post("/login", (req, res) => {
   });
 });
 
-// Dashboard API
+// Dashboard Route
 app.get("/dashboard", (req, res) => {
   res.json({
     message: "Welcome to Dashboard",
   });
 });
 
-const PORT = 5000;
+// Render Port Fix
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
